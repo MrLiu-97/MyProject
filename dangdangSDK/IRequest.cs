@@ -1,0 +1,27 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: dangdangSDK.IRequest`1
+// Assembly: dangdangSDK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 2DDC70E8-6A22-4017-8668-FEFB5A3C20F2
+// Assembly location: E:\Project\ProductOnlineNew\trunk\lib\dangdangSDK.dll
+
+using dangdangSDK.Util;
+using System.Collections.Generic;
+
+namespace dangdangSDK
+{
+    public interface IRequest<out T> where T : DDResponse
+    {
+        string HttpMethod { get; }
+
+        string ApiGateway { get; }
+
+        string DDMethod { get; }
+
+        bool needUpload { get; }
+
+        Dictionary<string, FileItem> GetFilesParams();
+
+        Dictionary<string, object> GetParams();
+    }
+}
+

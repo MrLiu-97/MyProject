@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsolePrintMain
@@ -58,26 +59,35 @@ namespace ConsolePrintMain
         }
         public void OnMouseDown()
         {
-
+            int thrNumber = 64;
+            ManualResetEvent[] manu = new ManualResetEvent[thrNumber];
+            ManualResetEvent.WaitAll(manu);
         }
         static void Main(string[] args)
         {
-            int nIndex = 7 % 3;
+           Practice2.Demo6();
+            MySQLPractice.Demo1();
+            int nIndex = 3 / 3;
             char a = 'a';
             char b = a;
             a = 'b';
             bool res1 = a == b;
             bool res2 = a.Equals(b);
+            Practice2.Demo08();
+            Practice2.Demo01();
+            //Practice1.Timer();
+            Practice1.StrStr();
+            Practice1.ReverseString();
             Practice1.MoveZeroes();
             Practice1.LongestPalindrome();
             Practice1.ProductExceptSelf();
-          
+
             Practice1.Multiply();
             //int nIndex = 3 / 2;
             Practice1.FindMedianSortedArrays();
             Practice1.StrStr("", "");
             Practice1.Merge();
-            Practice1.ReverseString();
+
             //PlayGame();
             Practice1.IsValid("");
             Practice1.LeetCodeDemo2(6);

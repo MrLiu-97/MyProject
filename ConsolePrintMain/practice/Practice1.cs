@@ -11,7 +11,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace ConsolePrintMain.practice
 {
@@ -200,6 +202,31 @@ namespace ConsolePrintMain.practice
             var a = Console.ReadKey();
         }
 
+        /// <summary>
+        /// 时间倒计时
+        /// </summary>
+        public static void Timer()
+        {
+            int second = 120;
+            string text = string.Empty;
+            while (true)
+            {
+
+                second--;
+                int a = second / 60;
+                int b = second % 60;
+                // d2 不足两位用0来填充
+                text = string.Format("{0:d2}:{1:d2}", a, b);
+                Console.WriteLine(text);
+                Thread.Sleep(1000);
+                Console.Clear();
+                if (second == 10)
+                {
+                    Console.WriteLine(1111);
+                    break;
+                }
+            }
+        }
 
         public static void Printg()
         {
@@ -1149,6 +1176,244 @@ namespace ConsolePrintMain.practice
 
         #region LeetCode练习
 
+        public static string CountAndSay(int n)
+        {
+            // 递归终止条件
+            if (n == 1)
+            {
+                return "1";
+            }
+            StringBuilder res = new StringBuilder();
+            // 拿到上一层的字符串
+            string str = CountAndSay(n - 1);
+            int length = str.Length;
+            // 开始指针为0
+            int start = 0;
+            // 注意这从起始条件要和下面长度统一
+            for (int i = 1; i < length + 1; i++)
+            {
+                // 字符串最后一位直接拼接
+                if (i == length)
+                {
+                    res.Append(i - start).Append(str[start]);
+                    // 直到start位的字符串和i位的字符串不同，拼接并更新start位
+                }
+                else if (str[i] != str[start])
+                {
+                    res.Append(i - start).Append(str[start]);
+                    start = i;
+                }
+            }
+            return res.ToString();
+
+            //StringBuilder stringBuilder = new StringBuilder();
+            //if (n > 1)
+            //{
+            //    stringBuilder.Append(1);
+            //    CountAndSay(n - 1);
+            //}
+            //return stringBuilder.ToString();
+        }
+
+        static StringBuilder StringBuilder = new StringBuilder();
+        public static string CountAndDG(int n)
+        {
+            {
+                if (n == 1)
+                {
+                    return "1";
+                }
+                int i = 0;
+                //StringBuilder.Append(CountAndDG(n - 1)[i++] - '0');
+                string resStr = CountAndDG(n - 1);
+
+                return resStr;
+            }
+            {
+                //if (n == 1)
+                //{
+                //    return "1";
+                //}
+                //StringBuilder stringBuilder = new StringBuilder();
+                //string str = CountAndDG(n - 1);
+                //int stra = 0;
+                //for (int i = 1; i < str.Length + 1; i++)
+                //{
+                //    if (i == str.Length)
+                //    {
+                //        stringBuilder.Append(i - stra).Append(str[stra]);
+                //    }
+                //    else if (str[i] != str[stra])
+                //    {
+                //        stringBuilder.Append(i - stra).Append(str[stra]);
+                //        stra = i;
+                //    }
+                //}
+                //Console.WriteLine(str);
+                //return stringBuilder.ToString();
+            }
+        }
+        static int f(int n)
+        {
+            if (n <= 2)
+            {
+                return 1;
+            }
+            int f1 = 1;
+            int f2 = 2;
+            int sum = 0;
+            for (int i = 3; i <= n; i++)
+            {
+                sum = f1 + f2;
+                f1 = f2;
+                f2 = sum;
+            }
+            return sum;
+            //return f(n - 1) + f(n - 2);
+        }
+        public static int StrStr()
+        {
+            string aa = CountAndDG(3);
+
+            {
+                //编写一个函数来查找字符串数组中的最长公共前缀。
+                //如果不存在公共前缀，返回空字符串 ""。
+                string[] strs = { "flower", "flow", "flight" };
+
+                int index = f(3);
+                //while (index< strs.Length)
+                //{
+                //    strs[index]
+                //}
+                //for (int i = 0; i < strs.Length; i++)
+                //{
+                //    for (int j = 0; j < strs[i]; j++)
+                //    {
+
+                //    }
+                //}
+
+            }
+
+            {
+                //外观数列
+                //给定一个正整数 n ，输出外观数列的第 n 项。
+                //「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。
+                //你可以将其视作是由递归公式定义的数字字符串序列：
+                //countAndSay(1) = "1"
+                //countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。
+                //前五项如下：
+                //1.     1
+                //2.     11
+                //3.     21
+                //4.     1211
+                //5.     111221
+                //第一项是数字 1
+                //描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 "11"
+                //描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 "21"
+                //描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 "1211"
+                //描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 "111221"
+
+                //输入：n = 1
+                //输出："1"
+                //解释：这是一个基本样例。
+                string aaa = CountAndDG(3);
+                //string aa = CountAndSay(3);
+
+            }
+
+            {
+                //实现 strStr()函数。
+                //给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
+                //输入：haystack = "hello", needle = "ll"
+                //输出：2   双指针  字符串 字符串匹配
+
+                string haystack = "mississippi", needle = "issip"; //mississippi issip
+                int j = 0;
+                for (int i = 0; i < haystack.Length; i++)
+                {
+                    if (haystack[i] == needle[j])
+                    {
+                        j++;
+                    }
+                    else
+                    {
+                        i = i - j + 1;
+                        j = 0;
+                    }
+                }
+
+                //if (haystack.Length == 1 && needle.Length == 1)
+                //    return haystack[0] == needle[0] ? 0 : -1;
+                int len1 = haystack.Length;
+                int len2 = needle.Length;
+
+                if (len2 == 0)
+                    return 0;
+                else if (len1 < len2)
+                    return -1;
+
+                int left = 0, right = 0;
+                while (left < len1 && right < len2)
+                {
+                    if (haystack[left] == needle[right])
+                    {
+                        left++;
+                        right++;
+                    }
+                    else
+                    {
+                        // 如果第二个不匹配  就从第一个匹配之后的下一个开始
+                        left = left - right + 1;
+                        right = 0;
+                    }
+                }
+                if (right == len2)
+                {
+                    return left - right;
+                }
+                //return -1;
+
+                while (left < haystack.Length && right < needle.Length)
+                {
+                    if (haystack[left] == needle[right])
+                    {
+                        left++;
+                        right++;
+                    }
+                    else
+                    {
+                        //如果不匹配，就回退，从第一次匹配的下一个开始，
+                        left = left - right + 1; ///   
+                        right = 0;
+                    }
+                }
+                if (right == needle.Length)
+                    return left - right;
+                return -1;
+            }
+        }
+
+        //protected override void OnAuthorization(AuthorizationContext filterContext)
+        //{
+        //    if (filterContext.HttpContext.User.Identity.Name != "")
+        //    {
+        //        FormsIdentity formsi = (FormsIdentity)filterContext.HttpContext.User.Identity;
+        //        CustomIdentity cusIden = new CustomIdentity(formsi);
+        //        if (cusIden != null)
+        //        {
+        //            _loginuser = cusIden.User;
+        //            UserPermisstionsOperate bllUser = new UserPermisstionsOperate(_loginuser.Id);
+        //            bllUser.StoragePermissions();
+        //        }
+        //        var isAjax = Request.IsAjaxRequest();
+        //        ControllerBase c = filterContext.Controller;
+        //        string thisAction = filterContext.ActionDescriptor.ActionName;
+        //        MethodInfo minfo = c.GetType().GetMethod(thisAction);
+        //        var path = Request.Path.ToLower();
+        //    }
+        //    base.OnAuthorization(filterContext);
+        //}
         //public void FormsAuthen(Maticsoft.Model.tbl_admin model)
         //{
         //    bool createPersistentCookie = false;
@@ -1172,9 +1437,634 @@ namespace ConsolePrintMain.practice
         //    //Response.Cookies.Add(otherCookie);
         //}
 
+        public static void ReverseString()
+        {
+            {
+                //字符串转换整数(atoi)
+                //输入：s = "4193 with words"
+                //输出：4193
+                //解释：
+                //第 1 步："4193 with words"（当前没有读入字符，因为没有前导空格）
+                //第 2 步："4193 with words"（当前没有读入字符，因为这里不存在 '-' 或者 '+'）
+                //第 3 步："4193 with words"（读入 "4193"；由于下一个字符不是一个数字，所以读入停止）
+                long bbb = 91283472332 / 2;
 
+                string s = "2147483648";
+                s = s.Trim();
+                int ans = 1;
+                int index = 0;
+                if (index >= s.Length)
+                {
+                    //return 0;
+                }
+                if (s[index] == '-')
+                {
+                    ans = -1;
+                }
+                if (s[index] == '+') // 如果有符号 + ;索引得+1
+                {
+                    index++;
+                }
+                int num = 0;
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (!char.IsDigit(s[i]))
+                    {
+                        //break;
+                        //return num * ans;
+                    }
+                    int res = num;  // 刚开始 先拿到第一个值
+
+                    int yu = (s[i] - '0') % 10;
+
+                    num = num * 10 + yu;    // 计算完后开始赋值
+
+                    int abs = num / 10;
+                    if (abs != res)
+                    {
+                        if (ans > 0)
+                        {
+                            //return int.MaxValue;
+                        }
+                        else
+                        {
+                            //return int.MinValue;
+                        }
+                    }
+                }
+                //return num * ans;
+
+
+                int a = int.MaxValue; //2147483648;
+                int fu = unchecked(214748364 * 10 + 8);
+            }
+            {
+                string[] str = { "0000" };
+                // 在堆栈中查找有没 存放值为 0000 地址  如果 没有 开辟一个存放字面值为"abc"的地址
+                string a = "0000";
+                bool res = str[0] == a;
+            }
+
+            {
+                //验证回文串
+                //给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+                //说明：本题中，我们将空字符串定义为有效的回文串。
+
+                //输入: "A man, a plan, a canal: Panama"
+                //输出: true   双指针  字符串
+
+                string s = ".,";
+                int len = s.Length;
+                int j = s.Length;
+                for (int i = 0; i < j;)
+                {
+                    if (!char.IsLetterOrDigit(s[i]))
+                    {
+                        i++;
+                    }
+                    else if (!char.IsLetterOrDigit(s[j - 1]))
+                    {
+                        j--;
+                    }
+                    else if (s[i] == s[j - 1])
+                    {
+                        i++;
+                        j--;
+
+                    }
+                    else
+                        return;
+                }
+
+                /// 双指针
+                s = s.ToLower();
+                int ss = '0';
+                int left = 0, right = s.Length - 1;
+                char sss = '1';
+                // 检测 char 字符 是否属于 字母或者 十进制数字类别
+                bool b = false;//char.IsLetterOrDigit('A');
+                while (left < right)
+                {
+
+                    if (!char.IsLetterOrDigit(s[left]))
+                    {
+                        left++;
+                    }
+                    else if (!char.IsLetterOrDigit(s[right]))
+                    {
+                        right--;
+                    }
+                    else if (s[left] == s[right])
+                    {
+                        left++;
+                        right--;
+                    }
+                    else
+                    {
+                        //return false;
+                        break;
+                    }
+                }
+                b = true;
+            }
+
+            {
+                //有效的字母异位词
+                //给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+                //输入: s = "anagram", t = "nagaram"
+                //输出: true    哈希表   字符串  排序
+
+                String s = "anagram", t = "nagaram"; // aacc  ccac  rat  car
+
+                /// 哈希表
+                Hashtable hashtable = new Hashtable();
+                for (int i = 0; i < s.Length; i++)
+                {
+
+                    if (hashtable.ContainsKey(s[i] - 'a'))
+                    {
+                        hashtable[s[i] - 'a'] = (int)hashtable[s[i] - 'a'] + 1;
+                    }
+                    else
+                        hashtable.Add(s[i] - 'a', 1);
+                }
+                for (int i = 0; i < t.Length; i++)
+                {
+                    if (hashtable.ContainsKey(t[i] - 'a'))
+                    {
+                        hashtable[t[i] - 'a'] = (int)hashtable[t[i] - 'a'] - 1;
+                        if ((int)hashtable[t[i] - 'a'] < 0)
+                        {
+                            //return false;
+                        }
+                    }
+                    //else
+                    //return false;
+                }
+
+                // char 字母（a-z） 在 int里面存入的是十进制 'a' = 97; 'A' = 65 其他字符 请参照 ASCII 字符表
+                int asd = 'A';
+                //  哈希表
+                if (s.Length != t.Length)
+                {
+                    //return false;
+                }
+                // 小写 英文字母 a-z 总 26个 'a'-'a'=0 相当于 从 0 -26 也可以把它当做索引使用
+                int[] letter = new int[26];
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    // 当做索引使用
+                    letter[s[i] - 'a']++;
+                }
+                for (int i = 0; i < t.Length; i++)
+                {
+                    letter[t[i] - 'a']--;
+                    if (letter[t[i] - 'a'] < 0)
+                    {
+                        //return false;
+                    }
+                }
+
+                /// 排序
+                if (s.Length != t.Length)
+                {
+                    //return false;
+                }
+                char[] char1 = s.ToCharArray();
+                char[] char2 = t.ToCharArray();
+
+                Array.Sort(char1);
+                Array.Sort(char2);
+
+                for (int i = 0; i < char1.Length; i++)
+                {
+                    if (char1[i] != char2[i])
+                    {
+                        return;
+                    }
+                }
+
+            }
+
+            {
+                {
+                    //Hashtable hashtable1 = new Hashtable();
+                    //for (int i = 0; i < s.Length; i++)
+                    //{
+                    //    if (!hashtable1.ContainsKey(s[i]))
+                    //    {
+                    //        hashtable1.Add(s[i], i);
+                    //    }
+                    //    else
+                    //    {
+                    //        hashtable1[s[i]] = -1;
+                    //    }
+                    //}
+                    //for (int i = 0; i < s.Length; i++)
+                    //{
+                    //    if ((int)hashtable1[s[i]] > -1)
+                    //    {
+                    //        return i;
+                    //    }
+                    //}
+                    //return -1;
+                }
+
+                //字符串中的第一个唯一字符
+                //给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 - 1。
+                //s = "leetcode"
+                //返回 0   
+                //队列 哈希表 字符串 Counting
+
+                string s = "leelc";
+
+                int left = 0, right = 1;
+                while (left < s.Length && right < s.Length)
+                {
+                    if (s[left] == s[right])
+                    {
+                        left++;
+                        right = left + 1;
+                    }
+                    else if (right >= s.Length - 1 && s[left] != s[right])
+                    {
+                        //return left;
+                        //left++;
+                    }
+                    else
+                    {
+                        right++;
+                    }
+                }
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    for (int j = i + 1; j < s.Length; j++)
+                    {
+                        if (true)
+                        {
+
+                        }
+                    }
+                }
+
+                // 方法二：哈希表
+                Hashtable hashtable1 = new Hashtable();
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (!hashtable1.ContainsKey(s[i]))
+                    {
+                        hashtable1.Add(s[i], i);
+                    }
+                    else
+                    {
+                        hashtable1[s[i]] = -1;
+                    }
+                }
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if ((int)hashtable1[s[i]] != -1)
+                    {
+                        //return i;
+                    }
+                }
+                //return -1;
+
+                Console.WriteLine("*****************************");
+
+                // 方法一： 队列
+                Queue<Tuple<char, int>> queue = new Queue<Tuple<char, int>>();
+                Hashtable hashtable = new Hashtable();
+                for (int i = 0; i < s.Length; i++)
+                {
+                    // 先判断哈希表里有没有 该元素
+                    if (!hashtable.ContainsKey(s[i]))
+                    {
+                        // 没有则添加 该元素值（key） 和 索引（value）
+                        hashtable.Add(s[i], i);
+                        // 添加到队列 二元组
+                        queue.Enqueue(new Tuple<char, int>(s[i], i));
+                    }
+                    else
+                    {
+                        // 有 则将 哈希表 对应的 该元素（key）的 value 值改为-1；
+                        hashtable[s[i]] = -1;
+                        int h = (int)hashtable[queue.Peek().Item1];
+                        // 当队列元素大于零  并且 队列中第一个元素值的 为-1
+                        while (queue.Count > 0 && (int)hashtable[queue.Peek().Item1] == -1)
+                        {
+                            // 移除开头的元素对象
+                            queue.Dequeue();
+                        }
+                    }
+                }
+
+                //return queue.Count == 0 ? -1 : queue.Peek().Item2;
+
+
+
+            }
+
+            {
+                //整数反转
+                //给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
+                //如果反转后整数超过 32 位的有符号整数的范围[−231, 231 − 1] ，就返回 0。
+                //假设环境不允许存储 64 位整数（有符号或无符号）。
+
+                // 输入：x = 123
+                // 输出：321   用数学公式
+
+                int x = 123;// 99999999
+                int res = 0;
+                while (x != 0)
+                {
+                    // 首先取余
+                    int yu = x % 10; // 3
+                    int anw = res * 10 + yu; // 0*10+3=3
+                    // 取出 和 res 相等的数值
+                    int isAnw = (anw - yu) / 10;    // (3-3)/10=0;
+                    if (isAnw != res)   //0!=0 flase
+                    {
+                        return;
+                    }
+                    res = anw;  // res=3;
+                    x /= 10;    // x=321/10 ; x=32;
+                }
+
+                while (x != 0)
+                {
+                    int yu = x % 10;    // 3 ,2
+                    int anw = res * 10 + yu;    // 0 * 10 + 3 = 3 , 3 * 10 + 2 = 32
+
+                    //  开始判断 
+                    // 第一次 res * 10 + yu ==> 0*10+3 = 3; 第二次  3 * 10 +2= 32 一次类推 32* 10+1 =320+1；
+                    // 第一次 (anw - yu) / 10 ==> (3-3)/10  != res ==>(3-3)/10 != 0; 此时 res =0;  所以不进入循环内
+                    // 第二次 (anw - yu) / 10 ==> (32-2)/10 != res ==>(32-2)/10 != 3; 此时 res =3;  所以不进入循环内
+                    if ((anw - yu) / 10 != res)
+                    {
+                        return;
+                    }
+                    res = anw;  // 给 res 赋值 
+                    x /= 10;
+                }
+
+            }
+
+            {
+                //反转字符串
+                //编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+                //不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+                //你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。
+                // 输入：["h","e","l","l","o"]
+                // 输出：["o","l","l","e","h"]
+                char[] s = { 'h', 'e', 'l', 'l', 'o' };
+
+                // 方案三  双指针
+                int left = 0, right = s.Length - 1;
+
+                while (left < right)
+                {
+                    char temp = s[left];
+                    s[left++] = s[right];
+                    s[right--] = temp;
+                }
+
+
+                // 方法一
+                //char temp = ' ';
+                int index = s.Length - 1;
+                //for (int i = 0; i < index; i++)
+                //{
+                //    temp = s[i];
+                //    s[i] = s[index];
+                //    s[index--] = temp;
+                //}
+
+                // 方法二  递归
+                ReverseStringDG(s, 0, index); // 首先从0 开始交换
+            }
+        }
+        public static void Swap(char[] s, int i, int j)
+        {
+            char temp = s[i];
+            s[i] = s[j];
+            s[j] = temp;
+        }
+        public static void ReverseStringDG(char[] s, int i, int j)
+        {
+
+            if (s.Length == 0 || i >= j)
+            {
+                return;
+            }
+            Swap(s, i, j); // 先交换第一遍 
+            ReverseStringDG(s, ++i, --j); // 第一遍交换完成之后  在 ++ -- 交换第二遍 以此类推
+        }
         public static void MoveZeroes()
         {
+            {
+                //旋转数组
+                //给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+                // 输入: nums = [1, 2, 3, 4, 5, 6, 7], k = 3
+                //输出: [5, 6, 7, 1, 2, 3, 4]
+                int[] nums1 = { 1, 2, 3, 4, 5, 6, 7 };//5 6 7 4 3 2 1  -1, -100, 3, 99  - 1, -100, 3, 99, 1 
+
+                int index = nums1.Length;
+                int temp = 0;
+                int k = 3;
+                int k1 = k;
+                for (int i = 0; i < index; i++)
+                {
+                    temp = nums1[i];
+                    nums1[i] = nums1[index - 1];
+                    nums1[index - 1] = temp;
+                    index--;
+                }   // 7 6 5 4 3 2 1
+                for (int i = 0; i < k1; i++)
+                {
+                    temp = nums1[i];
+                    nums1[i] = nums1[k1 - 1];
+                    nums1[k1 - 1] = temp;
+                    k1--;
+                }   // 5 6 7 4 3 2 1
+                index = nums1.Length;
+                for (int i = k; i < index; i++)
+                {
+                    temp = nums1[i];
+                    nums1[i] = nums1[index - 1];
+                    nums1[index - 1] = temp;
+                    index--;
+                }
+                Console.WriteLine();
+            }
+
+            {
+                //买卖股票的最佳时机 II
+                //给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
+                //设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+                //注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+
+                int[] nums = { 1, 2, 3, 6, 5 };  //1,2,3,4,5    7,6,4,3,1
+
+                int i = 0, j = 1;
+                int buy = 0;
+                int sum = 0;
+                while (i < nums.Length && j < nums.Length)
+                {
+                    if (buy == 0 && nums[i] < nums[j])
+                    {
+                        buy = nums[i];
+                    }
+                    else if (nums[i] + 1 < nums[j] || j == nums.Length - 1)
+                    {
+                        sum += nums[j] - buy;
+                        buy = 0;
+                        i++;
+                        j++;
+                    }
+                    else
+                    {
+                        i++;
+                        j++;
+                    }
+                }
+            }
+
+            {
+                // 删除排序数组中的重复项   双指针
+
+                //输入：nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+                //输出：5, nums = [0, 1, 2, 3, 4]
+                int[] nums = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+
+                int i = 0, j = 1;
+                while (i < nums.Length && j < nums.Length)
+                {
+                    if (nums[i] == nums[j])
+                    {
+                        j++;
+                    }
+                    else if (nums[i] != nums[j])
+                    {
+                        nums[++i] = nums[j];
+                        j++;
+                    }
+                }
+
+                //int j = 1;
+                //int i = 0;
+                while (i < nums.Length && j < nums.Length)
+                {
+
+                    if (nums[i] == nums[j])
+                    {
+                        j++;
+                    }
+                    else if (nums[i] != nums[j])
+                    {
+                        nums[i + 1] = nums[j];
+                        i++;
+                        j++;
+                    }
+
+                }
+
+                //for (int i = 0; i < nums.Length - 1; i++)
+                //{
+                //    if (nums[i] == nums[index])
+                //    {
+
+                //    }
+                //}
+
+
+            }
+
+            {
+                //旋转图像
+                //给定一个 n× n 的二维矩阵matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+
+                //你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
+
+                //输入：matrix = [[1, 2, 3],[4,5,6],[7,8,9]]
+                //输出：[[7,4,1],[8,5,2],[9,6,3]]
+                //输入：matrix = [[5, 1, 9, 11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+                //输出：[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+
+
+                int[][] matrix = {
+                       new int[] {5,1,9,11},    // 15,14,12,16    15, 13,2, 5 
+                       new int[] {2,4,8,10},    // 13, 3, 6, 7    14, 3, 6, 7 
+                       new int[] {13,3,6,7},    //  2, 4, 8,10    12, 4, 8,10   12, 6, 8,10
+                       new int[] {15,14,12,16}  //  5, 1, 9,11    16, 1, 9,11   16, 7, 9,11
+
+                     //new int[] {1,2,3 },    // 7,8,9    7 4 9   7 4 1
+                     //new int[] {4,5,6 },    // 4,5,6    8 5 6   8 5 6  8 5 2
+                     //new int[] {7,8,9 }     // 1,2,3    1 2 3   9 2 3  9 6 3
+                 };
+
+                int length = matrix.Length;
+
+                int[] tempArray = null;
+                int index = length - 1;
+                for (int i = 0; i < index; i++)
+                {
+                    tempArray = matrix[i];
+                    matrix[i] = matrix[index];
+                    matrix[index--] = tempArray;
+                }
+
+                int temp = 0;
+                for (int i = 0; i < length; i++)
+                {
+                    for (int j = i + 1; j < matrix[i].Length; j++)
+                    {
+                        temp = matrix[i][j];
+                        matrix[i][j] = matrix[j][i];
+                        matrix[j][i] = temp;
+                    }
+                }
+
+                { // 方案一 使用另一个空间
+                    for (int i = length - 1; i >= index; i--)
+                    {
+                        //tempArray = matrix[i];
+                        //matrix[i] = matrix[index];
+                        //matrix[index++] = tempArray;
+                    }
+
+                    ///*************
+                    //int length = matrix.Length;
+                    int[][] matrixNew = new int[length][];
+                    int[] arr = new int[length];
+                    //int index = 0;
+
+                    for (int i = 0; i < length; i++)
+                    {
+                        for (int j = matrix[i].Length - 1; j >= 0; j--)
+                        {
+                            arr[index++] = matrix[j][i];
+                        }
+                        matrixNew[i] = arr;
+                        arr = new int[length];
+                        index = 0;
+                    }
+
+                    for (int i = 0; i < length; i++)
+                    {
+                        for (int j = 0; j < matrixNew[i].Length; j++)
+                        {
+                            matrix[i][j] = matrixNew[i][j];
+                        }
+                    }
+                    //matrixNew.CopyTo(matrix, 0);
+                }
+
+            }
+
             {
                 //有效的数独
                 //请你判断一个9x9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
@@ -1200,7 +2090,8 @@ namespace ConsolePrintMain.practice
                 //    new char[]{'.','.','.','4','1','9','.','.','5'},
                 //    new char[]{'.','.','.','.','8','.','.','7','9'},
                 //};
-
+                //--- 待测试
+                //[[],[],[],[],[],[],[],[],[]]
                 char[][] board = {
                     new char[]{'5','3','.','.','7','.','.','.','.'},
                     new char[]{'6','.','.','1','9','5','.','.','.'},
@@ -1212,48 +2103,114 @@ namespace ConsolePrintMain.practice
                     new char[]{'.','.','.','4','1','9','.','.','5'},
                     new char[]{'.','.','.','.','8','.','.','7','9'}
                 };
-
-                int[,] intLength = new int[9, 9];
-
-
-                Hashtable hashtable = new Hashtable();
-                char[] charArray = new char[9];
-                int sumIndex = 0;
-                int charArrayIndex = 0;
-                int tempIndex = 0;
-                int arrayCount = 3 * 9;
-                int i = 0;
-                while (i < board.Length)
                 {
-                    for (int j = 0; j < board[i].Length; j++)
+                    HashSet<int> setRow = new HashSet<int>();
+                    HashSet<int> setCol = new HashSet<int>();
+                    int[,] setBox = new int[9, 9];
+
+                    for (int i = 0; i < board.Length; i++)
+                    {
+                        for (int j = 0; j < board[i].Length; j++)
+                        {
+
+                            if (board[i][j] != '.')
+                            {
+                                int num = board[i][j] - '0';
+                                if (!setRow.Add(num))
+                                {
+                                    //return false;
+                                }
+                                int k = (i / 3) * 3 + j / 3;
+                                if (setBox[k, num - 1] != 0)
+                                {
+                                    //return false;
+                                }
+                                // 如果 num 为 9 则会超出索引 所以 要 减一
+                                setBox[k, num - 1] = num;
+                            }
+                            if (board[j][i] != '.')
+                            {
+                                if (!setCol.Add(board[j][i] - '0'))
+                                {
+                                    //return false;
+                                }
+                            }
+                        }
+                        // 当一行一列添加完后 清除  避免下一行列 会遇到重复元素
+                        setRow.Clear();
+                        setCol.Clear();
+                    }
+                }
+                {
+
+                    HashSet<int> setRow = new HashSet<int>();
+                    HashSet<int> setCol = new HashSet<int>();
+                    //HashSet<int> setBox = new HashSet<int>();
+                    //Hashtable setBox = new Hashtable();
+                    int[,] setBox = new int[9, 9];
+                    int length = board.Length;
+                    for (int i = 0; i < length; i++)
+                    {
+                        for (int j = 0; j < board[i].Length; j++)
+                        {
+
+                            int num = board[i][j] - '0' - 1;
+                            if (board[i][j] != '.')
+                            {
+                                if (!setRow.Add(num))
+                                {
+                                    //return false;
+                                }
+                                int k = (i / 3) * 3 + j / 3;
+
+                                if (setBox[k, num] != 0)
+                                {
+                                    //return false;
+                                }
+                                setBox[k, num] = num + 1;
+                            }
+
+                            if (board[j][i] != '.')
+                            {
+                                if (!setCol.Add(board[j][i] - '0'))
+                                {
+                                    //return false;
+                                }
+                            }
+                        }
+                        setRow.Clear();
+                        setCol.Clear();
+                    }
+                }
+                {   // 待修改算法
+                    int[,] intLength = new int[9, 9];
+
+
+
+                    int sumIndex = 0;
+                    int arrayCount = 3 * 9;
+
+                    Hashtable hashtable = new Hashtable();
+                    char[] charArray = new char[9];
+                    int charArrayIndex = 0;
+                    int tempIndex = 0;
+                    int index = board.Length;
+                    int i = 0;
+                    for (int j = 0; j < board[i].Length;)
                     {
                         if (j > 0 && j % 3 == 0)
                         {
-
+                            i++;
+                            if (i < index)
+                                j = tempIndex;
                         }
 
-
-                        //if (j > 0 && j % 3 == 0 && sumIndex < arrayCount)
-                        //{
-                        //    sumIndex += j;
-                        //    j = tempIndex;
-                        //    i++;
-                        //    if (i > 0 && i % 3 == 0 && sumIndex < arrayCount)
-                        //    {
-                        //        tempIndex += i;
-                        //        i = 0;
-                        //        j = tempIndex;
-                        //    }
-                        //}
-
-
-                        //if (sumIndex == arrayCount)
-                        //{
-                        //    j = 0;
-                        //    sumIndex = 0;
-                        //    tempIndex = 0;
-                        //}
-
+                        if (i >= index && j >= 3) // && j >= 3
+                        {
+                            tempIndex += 3;
+                            i = 0;
+                            j = tempIndex;
+                        }
                         charArray[charArrayIndex++] = board[i][j];
                         if (charArrayIndex >= charArray.Length)
                         {
@@ -1272,16 +2229,23 @@ namespace ConsolePrintMain.practice
                             charArrayIndex = 0;
                         }
 
-
-
-                        //Console.Write(board[i][j] + "\t");
+                        j++;
+                        if (i < index - 1 && j >= index)
+                        {
+                            j = tempIndex;
+                        }
                     }
-                    //i++;
                 }
+
+                //Console.Write(board[i][j] + "\t");
+
+                //i++;
+
                 Console.WriteLine();
 
 
             }
+
             {
                 //两数之和
                 //给定一个整数数组 nums和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那两个 整数，并返回它们的数组下标。
@@ -1429,9 +2393,6 @@ namespace ConsolePrintMain.practice
 
         public static string LongestPalindrome()
         {
-
-
-
             {
                 int[] digits = { 9, 9 };
 
@@ -2382,7 +3343,7 @@ namespace ConsolePrintMain.practice
                 Array.Copy(ar, 3, nums1, 0, nums1.Length);
             }
         }
-        public static void ReverseString()
+        public static void ReverseString1()
         {
             char[] s2 = { 'h', 'e', 'l', 'l', 'o' };
 
@@ -3130,7 +4091,7 @@ namespace ConsolePrintMain.practice
             }
         }
         /**
-    * 对两个字符串数字进行相加，返回字符串形式的和
+        * 对两个字符串数字进行相加，返回字符串形式的和
 */
         public static string addStrings(string num1, string num2)
         {

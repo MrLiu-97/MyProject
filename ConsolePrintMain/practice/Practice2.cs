@@ -26,6 +26,7 @@ namespace ConsolePrintMain.practice
 
         public static int MaxProfit2(int[] prices)
         {
+            // 1
             return 1;
         }
         public static int MaxProfit(int[] prices)
